@@ -59,10 +59,11 @@ struct Generate: ParsableCommand {
             note("Writing to ‘\(output.path(percentEncoded: false))‘")
             do {
                 try source.write(to: output, atomically: true, encoding: .utf8)
+                note("Output written to ‘\(output.path(percentEncoded: false))‘")
             } catch let error {
                 note("\(error)")
+                throw error
             }
-            note("Output written to ‘\(output.path(percentEncoded: false))‘")
         }
     }
 
