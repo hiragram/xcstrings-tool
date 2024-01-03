@@ -34,7 +34,7 @@ extension Command {
 
 private extension PluginContextProtocol {
     var outputDirectory: Path {
-        pluginWorkDirectory.appending(subpath: "XCStringsToolGenerated")
+        pluginWorkDirectory
     }
 
     func outputPath(for file: File) -> Path {
