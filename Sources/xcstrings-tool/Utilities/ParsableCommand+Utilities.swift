@@ -23,6 +23,7 @@ extension ParsableCommand {
             try fileManager.createDirectory(at: directoryURL, withIntermediateDirectories: true)
             note("Created directory at \(directoryURL)")
         } else {
+            note("isDirectory: \(isDirectory)")
             note("No need to create directory.")
         }
     }
