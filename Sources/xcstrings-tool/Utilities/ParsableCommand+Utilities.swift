@@ -9,9 +9,16 @@ extension ParsableCommand {
             inputURL.deletingLastPathComponent()
         }
 
+        note("createDirectoryIfNeeded argument: \(inputURL)")
+        note("createDirectoryIfNeeded directoryURL: \(directoryURL)")
+
         let fileManager = FileManager.default
 
-        if !fileManager.fileExists(atPath: directoryURL.path(percentEncoded: false)) {
+        var isDirectory: ObjCBool = false
+        fileManager.fileExists(atPath: directoryURL.path(percentEncoded: false), isDirectory: &isDirectory)
+
+        if !fileManager.fileExists(atPath: directoryURL.path(percentEncoded: false), isDirectory: &isDirectory) {
+            note("isDirectory: \(isDirectory)")
             note("Creating directory at \(directoryURL)")
             try fileManager.createDirectory(at: directoryURL, withIntermediateDirectories: true)
             note("Created directory at \(directoryURL)")
