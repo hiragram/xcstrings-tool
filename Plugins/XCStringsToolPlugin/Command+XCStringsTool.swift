@@ -30,6 +30,7 @@ extension Command {
             ]
         )
         print("mowamowa: \(command)")
+        print("env: \(ProcessInfo.processInfo.environment["CI_XCODE_CLOUD"])")
         return command
     }
 }
