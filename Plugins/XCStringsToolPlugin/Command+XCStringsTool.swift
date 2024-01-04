@@ -15,7 +15,7 @@ extension XcodePluginContext: PluginContextProtocol {}
 
 extension Command {
     static func xcstringstool(for file: File, using context: PluginContextProtocol) throws -> Command {
-        .buildCommand(
+        let command = Command.buildCommand(
             displayName: "XCStringsTool: Generate Swift code for ‘\(file.path.lastComponent)‘",
             executable: try context.tool(named: "xcstrings-tool").path,
             arguments: [
@@ -29,12 +29,16 @@ extension Command {
                 context.outputPath(for: file)
             ]
         )
+
+        print("commandinfo", command)
+
+        return command
     }
 }
 
 private extension PluginContextProtocol {
     var outputDirectory: Path {
-        pluginWorkDirectory.appending(subpath: "Generated")
+        pluginWorkDirectory
     }
 
     func outputPath(for file: File) -> Path {
