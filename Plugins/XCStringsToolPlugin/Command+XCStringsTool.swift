@@ -38,7 +38,7 @@ extension Command {
 
 private extension PluginContextProtocol {
     var outputDirectory: Path {
-        pluginWorkDirectory
+        pluginWorkDirectory.appending(subpath: "GeneratedFiles")
     }
 
     func outputPath(for file: File) -> Path {
