@@ -17,6 +17,10 @@ extension ParsableCommand {
         var isDirectory: ObjCBool = false
         fileManager.fileExists(atPath: directoryURL.path(percentEncoded: false), isDirectory: &isDirectory)
 
+        try! fileManager.contentsOfDirectory(atPath: directoryURL.path(percentEncoded: false)).forEach({ content in
+            print("content: \(content)")
+        })
+
         if !fileManager.fileExists(atPath: directoryURL.path(percentEncoded: false), isDirectory: &isDirectory) {
             note("isDirectory: \(isDirectory)")
             note("Creating directory at \(directoryURL)")
