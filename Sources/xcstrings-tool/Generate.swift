@@ -52,18 +52,18 @@ struct Generate: ParsableCommand {
 
         // Write the output and catch errors in a diagnostic format
         try withThrownErrorsAsDiagnostics {
-            // Create the directory if it doesn't exist
-            try createDirectoryIfNeeded(for: output)
-
-            // Write the source to disk
-            note("Writing to ‘\(output.path(percentEncoded: false))‘")
-            do {
-                try source.write(to: output, atomically: true, encoding: .utf8)
-                note("Output written to ‘\(output.path(percentEncoded: false))‘")
-            } catch let error {
-                note("\(error)")
-                throw error
-            }
+//            // Create the directory if it doesn't exist
+//            try createDirectoryIfNeeded(for: output)
+//
+//            // Write the source to disk
+//            note("Writing to ‘\(output.path(percentEncoded: false))‘")
+//            do {
+//                try source.write(to: output, atomically: true, encoding: .utf8)
+//                note("Output written to ‘\(output.path(percentEncoded: false))‘")
+//            } catch let error {
+//                note("\(error)")
+//                throw error
+//            }
         }
     }
 
