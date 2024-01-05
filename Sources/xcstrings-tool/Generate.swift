@@ -62,7 +62,8 @@ struct Generate: ParsableCommand {
             do {
                 let fileAlreadyExists = FileManager.default.fileExists(atPath: output.path(percentEncoded: false))
                 note("already: \(fileAlreadyExists)")
-                try source.write(to: output, atomically: true, encoding: .utf8)
+//                try source.write(to: output, atomically: true, encoding: .utf8)
+                try source.data(using: .utf8)?.write(to: output)
                 note("Output written to ‘\(output.path(percentEncoded: false))‘")
             } catch let error {
                 note("\(error)")
