@@ -32,24 +32,22 @@ struct Generate: ParsableCommand {
     func run() throws {
         // Load the source ensuring that errors are thrown in a diagnostic format for the input
         let source = try withThrownErrorsAsDiagnostics(at: input) {
-//            // Load the String Catalog file
-//            let catalog = try StringCatalog(contentsOf: input)
-//
-//            // Extract resources from it
-//            let result = try StringExtractor.extractResources(from: catalog)
-//
-//            // Validate the extraction result
-//            result.issues.forEach { warning($0.description, sourceFile: input) }
-//            try ResourceValidator.validateResources(result.resources, in: input)
-//
-//            // Generate the associated Swift source
-//            return StringGenerator.generateSource(
-//                for: result.resources,
-//                tableName: tableName,
-//                accessLevel: resolvedAccessLevel
-//            )
+            // Load the String Catalog file
+            let catalog = try StringCatalog(contentsOf: input)
 
-            return "class Hello {}"
+            // Extract resources from it
+            let result = try StringExtractor.extractResources(from: catalog)
+
+            // Validate the extraction result
+            result.issues.forEach { warning($0.description, sourceFile: input) }
+            try ResourceValidator.validateResources(result.resources, in: input)
+
+            // Generate the associated Swift source
+            return StringGenerator.generateSource(
+                for: result.resources,
+                tableName: tableName,
+                accessLevel: resolvedAccessLevel
+            )
         }
 
         // Write the output and catch errors in a diagnostic format
@@ -62,7 +60,6 @@ struct Generate: ParsableCommand {
             do {
                 let fileAlreadyExists = FileManager.default.fileExists(atPath: output.path(percentEncoded: false))
                 note("already: \(fileAlreadyExists)")
-//                try source.write(to: output, atomically: true, encoding: .utf8)
                 try source.data(using: .utf8)?.write(to: output)
                 note("Output written to ‘\(output.path(percentEncoded: false))‘")
             } catch let error {
