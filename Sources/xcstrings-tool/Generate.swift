@@ -32,38 +32,40 @@ struct Generate: ParsableCommand {
     func run() throws {
         // Load the source ensuring that errors are thrown in a diagnostic format for the input
         let source = try withThrownErrorsAsDiagnostics(at: input) {
-            // Load the String Catalog file
-            let catalog = try StringCatalog(contentsOf: input)
+//            // Load the String Catalog file
+//            let catalog = try StringCatalog(contentsOf: input)
+//
+//            // Extract resources from it
+//            let result = try StringExtractor.extractResources(from: catalog)
+//
+//            // Validate the extraction result
+//            result.issues.forEach { warning($0.description, sourceFile: input) }
+//            try ResourceValidator.validateResources(result.resources, in: input)
+//
+//            // Generate the associated Swift source
+//            return StringGenerator.generateSource(
+//                for: result.resources,
+//                tableName: tableName,
+//                accessLevel: resolvedAccessLevel
+//            )
 
-            // Extract resources from it
-            let result = try StringExtractor.extractResources(from: catalog)
-
-            // Validate the extraction result
-            result.issues.forEach { warning($0.description, sourceFile: input) }
-            try ResourceValidator.validateResources(result.resources, in: input)
-
-            // Generate the associated Swift source
-            return StringGenerator.generateSource(
-                for: result.resources,
-                tableName: tableName,
-                accessLevel: resolvedAccessLevel
-            )
+            return "class Hello {}"
         }
 
         // Write the output and catch errors in a diagnostic format
         try withThrownErrorsAsDiagnostics {
-//            // Create the directory if it doesn't exist
-//            try createDirectoryIfNeeded(for: output)
-//
-//            // Write the source to disk
-//            note("Writing to ‘\(output.path(percentEncoded: false))‘")
-//            do {
-//                try source.write(to: output, atomically: true, encoding: .utf8)
-//                note("Output written to ‘\(output.path(percentEncoded: false))‘")
-//            } catch let error {
-//                note("\(error)")
-//                throw error
-//            }
+            // Create the directory if it doesn't exist
+            try createDirectoryIfNeeded(for: output)
+
+            // Write the source to disk
+            note("Writing to ‘\(output.path(percentEncoded: false))‘")
+            do {
+                try source.write(to: output, atomically: true, encoding: .utf8)
+                note("Output written to ‘\(output.path(percentEncoded: false))‘")
+            } catch let error {
+                note("\(error)")
+                throw error
+            }
         }
     }
 
