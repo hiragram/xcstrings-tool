@@ -60,6 +60,8 @@ struct Generate: ParsableCommand {
             // Write the source to disk
             note("Writing to ‘\(output.path(percentEncoded: false))‘")
             do {
+                let fileAlreadyExists = FileManager.default.fileExists(atPath: output.path(percentEncoded: false))
+                note("already: \(fileAlreadyExists)")
                 try source.write(to: output, atomically: true, encoding: .utf8)
                 note("Output written to ‘\(output.path(percentEncoded: false))‘")
             } catch let error {
